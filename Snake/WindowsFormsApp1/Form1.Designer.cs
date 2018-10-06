@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace SnakeNooob
 {
     partial class Form1
     {
