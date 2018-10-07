@@ -8,14 +8,11 @@ namespace SnakeNooob
     {
         const int CellSize = 20;
 
-        int golovaX = 0;
-        int golovaY = 0;
+        Position golova = new Position(0, 0);
 
-        int foodX = 49;
-        int foodY = 29;
+        Position food = new Position(0, 0);
 
-        int golovaXSpeed = 0;
-        int golovaYSpeed = 0;
+        Position speed = new Position(0, 0);
 
         public Form1()
         {
@@ -40,29 +37,28 @@ namespace SnakeNooob
             graphics.DrawLine(Pens.DarkRed, CellSize * 25, 0, CellSize * 25, Box.Height);
             graphics.DrawLine(Pens.DarkRed, 0, 15 * CellSize, Box.Width, 15 * CellSize);
 
-            graphics.FillEllipse(Brushes.DarkViolet, golovaX * CellSize, golovaY * CellSize, CellSize, CellSize);
-            graphics.FillEllipse(Brushes.Firebrick, foodX * CellSize, foodY * CellSize, CellSize, CellSize);
+            graphics.FillEllipse(Brushes.DarkViolet, golova.X * CellSize, golova.Y * CellSize, CellSize, CellSize);
+            graphics.FillEllipse(Brushes.Firebrick, food.X * CellSize, food.Y * CellSize, CellSize, CellSize);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            golovaX += golovaXSpeed;
-            golovaY += golovaYSpeed;
+            golova += speed;
 
-            if (golovaX > 49)
-                golovaX = 0;
-            if (golovaX < 0)
-                golovaX = 49;
-            if (golovaY > 29)
-                golovaY = 0;
-            if (golovaY < 0)
-                golovaY = 29;
+            if (golova.X > 49)
+                golova.X = 0;
+            if (golova.X < 0)
+                golova.X = 49;
+            if (golova.Y > 29)
+                golova.Y = 0;
+            if (golova.Y < 0)
+                golova.Y = 29;
 
-            if (golovaX == foodX && golovaY == foodY)
+            if (golova.X == food.X && golova.Y == food.Y)
             {
                 Random rand = new Random();
-                foodX = rand.Next(0, 50);
-                foodY = rand.Next(0, 30);
+                food.X = rand.Next(0, 50);
+                food.Y = rand.Next(0, 30);
             }
 
             Box.Refresh();
@@ -72,32 +68,32 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                golovaXSpeed = -1;
-                golovaYSpeed = 0;
+                speed.X = -1;
+                speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
             {
-                golovaXSpeed = 1;
-                golovaYSpeed = 0;
+                speed.X = 1;
+                speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
-                golovaYSpeed = 1;
-                golovaXSpeed = 0;
+                speed.Y = 1;
+                speed.X = 0;
             }
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                golovaYSpeed = -1;
-                golovaXSpeed = 0;
+                speed.Y = -1;
+                speed.X = 0;
             }
 
             if (e.KeyCode == Keys.Space)
             {
-                golovaYSpeed = 0;
-                golovaXSpeed = 0;
+                speed.Y = 0;
+                speed.X = 0;
             }
         }
     }
