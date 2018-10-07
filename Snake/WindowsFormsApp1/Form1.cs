@@ -7,11 +7,11 @@ namespace SnakeNooob
     public partial class Form1 : Form
     {
         const int CellSize = 20;
+        const int H = 30;
+        const int W = 50;
 
         Position golova = new Position(0, 0);
-
         Position food = new Position(0, 0);
-
         Position speed = new Position(0, 0);
 
         public Form1()
@@ -45,20 +45,20 @@ namespace SnakeNooob
         {
             golova += speed;
 
-            if (golova.X > 49)
+            if (golova.X > W - 1)
                 golova.X = 0;
             if (golova.X < 0)
-                golova.X = 49;
-            if (golova.Y > 29)
+                golova.X = W - 1;
+            if (golova.Y > H - 1)
                 golova.Y = 0;
             if (golova.Y < 0)
-                golova.Y = 29;
+                golova.Y = H - 1;
 
             if (golova.X == food.X && golova.Y == food.Y)
             {
                 Random rand = new Random();
-                food.X = rand.Next(0, 50);
-                food.Y = rand.Next(0, 30);
+                food.X = rand.Next(0, W);
+                food.Y = rand.Next(0, H);
             }
 
             Box.Refresh();
