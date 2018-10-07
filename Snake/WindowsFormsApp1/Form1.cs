@@ -8,17 +8,14 @@ namespace SnakeNooob
     {
         const int CellSize = 20;
 
-        int golX = CellSize;
-        int golY = CellSize;
+        int golovaX = 0;
+        int golovaY = 0;
 
-        int foodX = CellSize * 5;
-        int foodY = CellSize * 5;
+        int foodX = 49;
+        int foodY = 29;
 
-        int golXSpeed = CellSize * 0;
-        int golYSpeed = CellSize * 0;
-
-
-        Random rand = new Random();
+        int golovaXSpeed = 0;
+        int golovaYSpeed = 0;
 
         public Form1()
         {
@@ -31,43 +28,42 @@ namespace SnakeNooob
 
 
             for (int i = 0; i < 51; i++)
-            {
-                graphics.DrawLine(Pens.DarkRed, i * CellSize, 0, i * CellSize, Box.Height);
-            }
+                graphics.DrawLine(Pens.Green, i * CellSize, 0, i * CellSize, Box.Height);
 
             for (int i = 0; i < 31; i++)
-            {
-                graphics.DrawLine(Pens.DarkRed, 0, i * CellSize, Box.Width, i * CellSize);
-            }
+                graphics.DrawLine(Pens.Green, 0, i * CellSize, Box.Width, i * CellSize);
 
-            graphics.FillEllipse(Brushes.Brown, golX, golY, CellSize, CellSize);
-            graphics.FillEllipse(Brushes.DarkBlue, foodX, foodY, CellSize, CellSize);
+            graphics.DrawLine(Pens.DarkRed, CellSize * 0, 0, CellSize * 0, Box.Height);
+            graphics.DrawLine(Pens.DarkRed, 0, CellSize * 0, Box.Width, CellSize * 0);
+            graphics.DrawLine(Pens.DarkRed, CellSize * 50, 0, CellSize * 50, Box.Height);
+            graphics.DrawLine(Pens.DarkRed, 0, 30 * CellSize, Box.Width, 30 * CellSize);
+            graphics.DrawLine(Pens.DarkRed, CellSize * 25, 0, CellSize * 25, Box.Height);
+            graphics.DrawLine(Pens.DarkRed, 0, 15 * CellSize, Box.Width, 15 * CellSize);
+
+            graphics.FillEllipse(Brushes.DarkViolet, golovaX * CellSize, golovaY * CellSize, CellSize, CellSize);
+            graphics.FillEllipse(Brushes.Firebrick, foodX * CellSize, foodY * CellSize, CellSize, CellSize);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            golX += golXSpeed * CellSize;
-            golY += golYSpeed * CellSize;
+            golovaX += golovaXSpeed;
+            golovaY += golovaYSpeed;
 
-            if (golX > CellSize * 49)
-                golX = CellSize * 0;
-            if (golX < CellSize * 0)
-                golX = CellSize * 49;
-            if (golY > CellSize * 29)
-                golY = CellSize * 0;
-            if (golY < CellSize * 0)
-                golY = CellSize * 29;
+            if (golovaX > 49)
+                golovaX = 0;
+            if (golovaX < 0)
+                golovaX = 49;
+            if (golovaY > 29)
+                golovaY = 0;
+            if (golovaY < 0)
+                golovaY = 29;
 
-            if (golX == foodX && golY == foodY)
+            if (golovaX == foodX && golovaY == foodY)
             {
-                // int r = rand.Next(0, 50);
-                // int t = rand.Next(0, 30);
-                foodX = golX + CellSize;
-                foodY = golY + CellSize;
+                Random rand = new Random();
+                foodX = rand.Next(0, 50);
+                foodY = rand.Next(0, 30);
             }
-
-            foodX = golX;
-            foodY = golY + CellSize;
 
             Box.Refresh();
         }
@@ -76,32 +72,32 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                golXSpeed = -1;
-                golYSpeed = 0;
+                golovaXSpeed = -1;
+                golovaYSpeed = 0;
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
             {
-                golXSpeed = 1;
-                golYSpeed = 0;
+                golovaXSpeed = 1;
+                golovaYSpeed = 0;
             }
 
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
-                golYSpeed = 1;
-                golXSpeed = 0;
+                golovaYSpeed = 1;
+                golovaXSpeed = 0;
             }
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                golYSpeed = -1;
-                golXSpeed = 0;
+                golovaYSpeed = -1;
+                golovaXSpeed = 0;
             }
 
             if (e.KeyCode == Keys.Space)
             {
-                golYSpeed = 0;
-                golXSpeed = 0;
+                golovaYSpeed = 0;
+                golovaXSpeed = 0;
             }
         }
     }
