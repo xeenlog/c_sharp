@@ -1,49 +1,57 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using System;
+using System.Collections.Generic;
 
 namespace SnakeNooob
 {
     public partial class Form1 : Form
     {
-        const int CellSize = 20;
         const int H = 30;
         const int W = 50;
+        const int S = 20; //размер клетки в пикселях
 
         Position golova = new Position(0, 0);
-        Position food = new Position(0, 0);
+        Position food = new Position(9, 9);
         Position speed = new Position(0, 0);
+        readonly List<Position> snakeParts = new List<Position>();
+
 
         public Form1()
         {
             InitializeComponent();
+            snakeParts.Add(new Position(5, 5));
         }
 
         private void Box_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
 
-
             for (int i = 0; i < 51; i++)
-                graphics.DrawLine(Pens.Green, i * CellSize, 0, i * CellSize, Box.Height);
+                graphics.DrawLine(Pens.Green, i * S, 0, i * S, Box.Height);
 
             for (int i = 0; i < 31; i++)
-                graphics.DrawLine(Pens.Green, 0, i * CellSize, Box.Width, i * CellSize);
+                graphics.DrawLine(Pens.Green, 0, i * S, Box.Width, i * S);
 
-            graphics.DrawLine(Pens.DarkRed, CellSize * 0, 0, CellSize * 0, Box.Height);
-            graphics.DrawLine(Pens.DarkRed, 0, CellSize * 0, Box.Width, CellSize * 0);
-            graphics.DrawLine(Pens.DarkRed, CellSize * 50, 0, CellSize * 50, Box.Height);
-            graphics.DrawLine(Pens.DarkRed, 0, 30 * CellSize, Box.Width, 30 * CellSize);
-            graphics.DrawLine(Pens.DarkRed, CellSize * 25, 0, CellSize * 25, Box.Height);
-            graphics.DrawLine(Pens.DarkRed, 0, 15 * CellSize, Box.Width, 15 * CellSize);
+            graphics.DrawLine(Pens.DarkRed, S * 0, 0, S * 0, Box.Height);
+            graphics.DrawLine(Pens.DarkRed, 0, S * 0, Box.Width, S * 0);
+            graphics.DrawLine(Pens.DarkRed, S * 50, 0, S * 50, Box.Height);
+            graphics.DrawLine(Pens.DarkRed, 0, 30 * S, Box.Width, 30 * S);
+            graphics.DrawLine(Pens.DarkRed, S * 25, 0, S * 25, Box.Height);
+            graphics.DrawLine(Pens.DarkRed, 0, 15 * S, Box.Width, 15 * S);
 
-            graphics.FillEllipse(Brushes.DarkViolet, golova.X * CellSize, golova.Y * CellSize, CellSize, CellSize);
-            graphics.FillEllipse(Brushes.Firebrick, food.X * CellSize, food.Y * CellSize, CellSize, CellSize);
+            foreach (Position snakePart in snakeParts)
+            for (int i = 0; i < 31; i++)
+                graphics.FillEllipse(Brushes.DarkViolet, snakeParts[0].X * S, snakeParts[0].Y * S, S, S);
+
+            graphics.FillEllipse(Brushes.Firebrick, food.X * S, food.Y * S, S, S);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             golova += speed;
+            snakeParts.Insert(1, item: new Position(1, 1));
+            snakeParts.RemoveAt(1 - 1);
 
             if (golova.X > W - 1)
                 golova.X = 0;
@@ -68,8 +76,9 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                speed.X = -1;
-                speed.Y = 0;
+                snakeParts.Insert(0, item: new Position(golova.X - 1, golova.Y));
+             // speed.X = -1;
+             // speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
