@@ -41,8 +41,7 @@ namespace SnakeNooob
             graphics.DrawLine(Pens.DarkRed, 0, 15 * S, Box.Width, 15 * S);
 
             foreach (Position snakePart in snakeParts)
-            for (int i = 0; i < 31; i++)
-                graphics.FillEllipse(Brushes.DarkViolet, snakeParts[0].X * S, snakeParts[0].Y * S, S, S);
+                graphics.FillEllipse(Brushes.DarkViolet, snakePart.X * S, snakePart.Y * S, S, S);
 
             graphics.FillEllipse(Brushes.Firebrick, food.X * S, food.Y * S, S, S);
         }
@@ -50,8 +49,9 @@ namespace SnakeNooob
         private void timer1_Tick(object sender, EventArgs e)
         {
             golova += speed;
-            snakeParts.Insert(1, item: new Position(1, 1));
-            snakeParts.RemoveAt(1 - 1);
+            snakeParts.Insert(1, item: new Position(golova.X + 1, golova.Y));
+            if (snakeParts.Count > golova.X) snakeParts.RemoveAt(golova.X);
+
 
             if (golova.X > W - 1)
                 golova.X = 0;
@@ -76,9 +76,8 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                snakeParts.Insert(0, item: new Position(golova.X - 1, golova.Y));
-             // speed.X = -1;
-             // speed.Y = 0;
+                speed.X = -1;
+                speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
