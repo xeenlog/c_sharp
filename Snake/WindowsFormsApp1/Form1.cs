@@ -9,9 +9,9 @@ namespace SnakeNooob
     {
         const int H = 30;
         const int W = 50;
-        const int S = 20; //размер клетки в пикселях
+        const int S = 20;
 
-        Position golova = new Position(0, 0);
+      //  Position golova = new Position(0, 0);
         Position food = new Position(9, 9);
         Position speed = new Position(0, 0);
         readonly List<Position> snakeParts = new List<Position>();
@@ -48,25 +48,28 @@ namespace SnakeNooob
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            golova += speed;
-            snakeParts.Insert(1, item: new Position(golova.X + 1, golova.Y));
-            if (snakeParts.Count > golova.X) snakeParts.RemoveAt(golova.X);
+            snakeParts[0] += speed;
 
+            if (snakeParts[0].X > W - 1)
+                snakeParts[0] = new Position(0, snakeParts[0].Y);
+            if (snakeParts[0].X < 0)
+                snakeParts[0] = new Position(W - 1, snakeParts[0].Y);
+            if (snakeParts[0].Y > H - 1)
+                snakeParts[0] = new Position(snakeParts[0].X, 0);
+            if (snakeParts[0].Y < 0)
+                snakeParts[0] = new Position(snakeParts[0].X, H - 1);
 
-            if (golova.X > W - 1)
-                golova.X = 0;
-            if (golova.X < 0)
-                golova.X = W - 1;
-            if (golova.Y > H - 1)
-                golova.Y = 0;
-            if (golova.Y < 0)
-                golova.Y = H - 1;
-
-            if (golova.X == food.X && golova.Y == food.Y)
+            if (snakeParts[0].X == food.X && snakeParts[0].Y == food.Y)
             {
+                snakeParts.Insert(0, item: new Position(snakeParts[1].X - 1, snakeParts[1].Y - 1));
                 Random rand = new Random();
                 food.X = rand.Next(0, W);
                 food.Y = rand.Next(0, H);
+            }
+
+            else
+            {
+                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
             }
 
             Box.Refresh();
@@ -76,24 +79,32 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
+                snakeParts.Insert(0, item: new Position(snakeParts[0].X - 1, snakeParts[0].Y));
+                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.X = -1;
                 speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
             {
+                snakeParts.Insert(0, item: new Position(snakeParts[0].X + 1, snakeParts[0].Y));
+                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.X = 1;
                 speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
+                snakeParts.Insert(0, item: new Position(snakeParts[0].X, snakeParts[0].Y + 1));
+                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.Y = 1;
                 speed.X = 0;
             }
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
+                snakeParts.Insert(0, item: new Position(snakeParts[0].X, snakeParts[0].Y - 1));
+                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.Y = -1;
                 speed.X = 0;
             }
