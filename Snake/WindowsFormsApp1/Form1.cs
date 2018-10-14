@@ -11,7 +11,6 @@ namespace SnakeNooob
         const int W = 50;
         const int S = 20;
 
-      //  Position golova = new Position(0, 0);
         Position food = new Position(9, 9);
         Position speed = new Position(0, 0);
         readonly List<Position> snakeParts = new List<Position>();
@@ -49,10 +48,11 @@ namespace SnakeNooob
         private void timer1_Tick(object sender, EventArgs e)
         {
             snakeParts[0] += speed;
+            snakeParts.Insert(1, item: new Position(snakeParts[0].X, snakeParts[0].Y));
 
             if (snakeParts[0].X > W - 1)
-                snakeParts[0] = new Position(0, snakeParts[0].Y);
-            if (snakeParts[0].X < 0)
+                snakeParts[0] = new Position(1, snakeParts[0].Y);
+            if (snakeParts[0].X <= 0)
                 snakeParts[0] = new Position(W - 1, snakeParts[0].Y);
             if (snakeParts[0].Y > H - 1)
                 snakeParts[0] = new Position(snakeParts[0].X, 0);
@@ -61,7 +61,6 @@ namespace SnakeNooob
 
             if (snakeParts[0].X == food.X && snakeParts[0].Y == food.Y)
             {
-                snakeParts.Insert(0, item: new Position(snakeParts[1].X - 1, snakeParts[1].Y - 1));
                 Random rand = new Random();
                 food.X = rand.Next(0, W);
                 food.Y = rand.Next(0, H);
@@ -69,7 +68,7 @@ namespace SnakeNooob
 
             else
             {
-                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
+                snakeParts.RemoveAt(snakeParts.Count - 1);
             }
 
             Box.Refresh();
@@ -79,32 +78,24 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                snakeParts.Insert(0, item: new Position(snakeParts[0].X - 1, snakeParts[0].Y));
-                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.X = -1;
                 speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
             {
-                snakeParts.Insert(0, item: new Position(snakeParts[0].X + 1, snakeParts[0].Y));
-                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.X = 1;
                 speed.Y = 0;
             }
 
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
-                snakeParts.Insert(0, item: new Position(snakeParts[0].X, snakeParts[0].Y + 1));
-                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.Y = 1;
                 speed.X = 0;
             }
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                snakeParts.Insert(0, item: new Position(snakeParts[0].X, snakeParts[0].Y - 1));
-                if (snakeParts.Count > snakeParts[0].X) snakeParts.RemoveAt(snakeParts[0].X);
                 speed.Y = -1;
                 speed.X = 0;
             }
