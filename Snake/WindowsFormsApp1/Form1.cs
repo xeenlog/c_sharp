@@ -47,17 +47,16 @@ namespace SnakeNooob
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            snakeParts[0] += speed;
-            snakeParts.Insert(1, item: new Position(snakeParts[0].X, snakeParts[0].Y));
+            snakeParts.Insert(0, snakeParts[0] + speed);
 
             if (snakeParts[0].X > W - 1)
-                snakeParts[0] = new Position(1, snakeParts[0].Y);
-            if (snakeParts[0].X <= 0)
-                snakeParts[0] = new Position(W - 1, snakeParts[0].Y);
+                snakeParts[0].X = 1;
+            if (snakeParts[0].X < 0)
+                snakeParts[0].X = W - 1;
             if (snakeParts[0].Y > H - 1)
-                snakeParts[0] = new Position(snakeParts[0].X, 0);
+                snakeParts[0].Y = 0;
             if (snakeParts[0].Y < 0)
-                snakeParts[0] = new Position(snakeParts[0].X, H - 1);
+                snakeParts[0].Y = H - 1;
 
             if (snakeParts[0].X == food.X && snakeParts[0].Y == food.Y)
             {
