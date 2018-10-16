@@ -13,7 +13,7 @@ namespace SnakeNooob
 
         Position food = new Position(9, 9);
         Position speed = new Position(0, 0);
-        readonly List<Position> snakeParts = new List<Position>();
+        List<Position> snakeParts = new List<Position>();
 
 
         public Form1()
@@ -39,18 +39,30 @@ namespace SnakeNooob
             graphics.DrawLine(Pens.DarkRed, S * 25, 0, S * 25, Box.Height);
             graphics.DrawLine(Pens.DarkRed, 0, 15 * S, Box.Width, 15 * S);
 
-            foreach (Position snakePart in snakeParts)
-                graphics.FillEllipse(Brushes.DarkViolet, snakePart.X * S, snakePart.Y * S, S, S);
+            for (var i = 0; i < snakeParts.Count; i++)
+            {
+                graphics.FillEllipse(Brushes.DarkViolet, snakeParts[i].X * S, snakeParts[i].Y * S, S, S);
+            }
 
             graphics.FillEllipse(Brushes.Firebrick, food.X * S, food.Y * S, S, S);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (speed.X == 0 && speed.Y == 0)
+                return;
+
+            if (snakeParts.Contains(snakeParts[0] + speed))
+            {
+                snakeParts.Clear();
+                snakeParts.Add(new Position(5, 5));
+                return;
+            }
+            
             snakeParts.Insert(0, snakeParts[0] + speed);
 
             if (snakeParts[0].X > W - 1)
-                snakeParts[0].X = 1;
+                snakeParts[0].X = 0;
             if (snakeParts[0].X < 0)
                 snakeParts[0].X = W - 1;
             if (snakeParts[0].Y > H - 1)
@@ -71,6 +83,17 @@ namespace SnakeNooob
             }
 
             Box.Refresh();
+        }
+
+        private bool IsHeadOnBody()
+        {
+            for (int i = 0; i < snakeParts.Count; i++)
+            {
+                if (snakeParts[2] == snakeParts[i])
+                    return true;
+            }
+            
+            return false;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
