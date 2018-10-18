@@ -100,26 +100,38 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                speed.X = -1;
-                speed.Y = 0;
+                if (speed.X != 1 || snakeParts[1].X >= 0)
+                {
+                    speed.X = -1;
+                    speed.Y = 0;
+                }
             }
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
             {
-                speed.X = 1;
-                speed.Y = 0;
+                if (speed.X != -1)
+                {
+                    speed.X = 1;
+                    speed.Y = 0;
+                }
             }
 
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
-                speed.Y = 1;
-                speed.X = 0;
+                if (speed.Y != -1)
+                {
+                    speed.Y = 1;
+                    speed.X = 0;
+                }
             }
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                speed.Y = -1;
-                speed.X = 0;
+                if (speed.Y != 1)
+                {
+                    speed.Y = -1;
+                    speed.X = 0;
+                }
             }
 
             if (e.KeyCode == Keys.Space)
