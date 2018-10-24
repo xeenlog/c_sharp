@@ -100,7 +100,7 @@ namespace SnakeNooob
         {
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
             {
-                if (speed.X != 1 || snakeParts[1].X >= 0)
+                if (!(speed.X == 1 && snakeParts.Count >= 2))
                 {
                     speed.X = -1;
                     speed.Y = 0;
@@ -109,7 +109,7 @@ namespace SnakeNooob
 
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
             {
-                if (speed.X != -1)
+                if (!(speed.X == -1 && snakeParts.Count >= 2))
                 {
                     speed.X = 1;
                     speed.Y = 0;
@@ -118,7 +118,7 @@ namespace SnakeNooob
 
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
-                if (speed.Y != -1)
+                if (!(speed.Y == -1 && snakeParts.Count >= 2))
                 {
                     speed.Y = 1;
                     speed.X = 0;
@@ -127,7 +127,7 @@ namespace SnakeNooob
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                if (speed.Y != 1)
+                if (!(speed.Y == 1 && snakeParts.Count >= 2))
                 {
                     speed.Y = -1;
                     speed.X = 0;
