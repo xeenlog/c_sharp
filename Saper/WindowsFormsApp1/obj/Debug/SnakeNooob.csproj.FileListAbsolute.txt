@@ -18,3 +18,13 @@ C:\Users\xeenlog\APP_Repo\trunk\Saper\WindowsFormsApp1\obj\Debug\SnakeNooob.cspr
 C:\Users\xeenlog\APP_Repo\trunk\Saper\WindowsFormsApp1\obj\Debug\SnakeNooob.csproj.CoreCompileInputs.cache
 C:\Users\xeenlog\APP_Repo\trunk\Saper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\xeenlog\APP_Repo\trunk\Saper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\SnakeNooob.csprojAssemblyReference.cache
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\SnakeNooob.Form1.resources
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\SnakeNooob.csproj.GenerateResource.cache
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\SnakeNooob.csproj.CoreCompileInputs.cache
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\xeenlog\Google Диск\Desktop\c_sharp.git\Saper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
